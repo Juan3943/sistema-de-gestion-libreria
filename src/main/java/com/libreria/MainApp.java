@@ -59,7 +59,7 @@ public class MainApp extends Application {
         // CAMBIO: Tamaño más grande y redimensionable
         Scene scene = new Scene(layoutPrincipal, 1400, 850);  // Aumentado de 1200x750
 
-        stage.setTitle("📚 Librería Papelitos - Dashboard");
+        stage.setTitle("📚 Librería- Dashboard");
         stage.setScene(scene);
 
         // CAMBIO IMPORTANTE: Permitir redimensionar
@@ -234,7 +234,8 @@ public class MainApp extends Application {
         contenidoPrincipal.getChildren().clear();
         contenidoPrincipal.getChildren().add(scrollPane);  // Agregar ScrollPane en lugar de dashboard directo
 
-        primaryStage.setTitle("📚 Librería Papelitos - Panel Principal");
+        primaryStage.setTitle("📚 Librería" +
+                "- Panel Principal");
         System.out.println("✅ Dashboard con datos reales mostrado");
     }
 
@@ -615,7 +616,7 @@ private List<Producto> obtenerProductosConProblemas() {
             contenidoPrincipal.getChildren().clear();
             contenidoPrincipal.getChildren().add(contenido);
 
-            primaryStage.setTitle("📚 Librería Papelitos - Módulo de Ventas - Carrito");
+            primaryStage.setTitle("📚 Librería- Módulo de Ventas - Carrito");
 
         } catch (IOException e) {
             System.err.println("❌ Error al cargar ventas: " + e.getMessage());
@@ -637,7 +638,7 @@ private List<Producto> obtenerProductosConProblemas() {
             contenidoPrincipal.getChildren().clear();
             contenidoPrincipal.getChildren().add(contenido);
 
-            primaryStage.setTitle("📚 Librería Papelitos - Módulo de Ventas - Historial");
+            primaryStage.setTitle("📚 Librería - Módulo de Ventas - Historial");
 
         } catch (IOException e) {
             System.err.println("❌ Error al cargar ventas: " + e.getMessage());
@@ -658,7 +659,7 @@ private List<Producto> obtenerProductosConProblemas() {
             contenidoPrincipal.getChildren().clear();
             contenidoPrincipal.getChildren().add(contenido);
 
-            primaryStage.setTitle("📚 Librería Papelitos - Módulo de Stock");
+            primaryStage.setTitle("📚 Librería - Módulo de Stock");
 
         } catch (IOException e) {
             System.err.println("❌ Error al cargar stock: " + e.getMessage());
@@ -684,7 +685,7 @@ private List<Producto> obtenerProductosConProblemas() {
             contenidoPrincipal.getChildren().clear();
             contenidoPrincipal.getChildren().add(contenido);
 
-            primaryStage.setTitle("📚 Librería Papelitos - Nuevo Producto");
+            primaryStage.setTitle("📚 Librería - Nuevo Producto");
 
         } catch (IOException e) {
             System.err.println("❌ Error al cargar stock: " + e.getMessage());
@@ -705,7 +706,7 @@ private List<Producto> obtenerProductosConProblemas() {
             contenidoPrincipal.getChildren().clear();
             contenidoPrincipal.getChildren().add(contenido);
 
-            primaryStage.setTitle("📚 Librería Papelitos - Módulo de Servicios");
+            primaryStage.setTitle("📚 Librería - Módulo de Servicios");
 
         } catch (IOException e) {
             System.err.println("❌ Error al cargar servicios: " + e.getMessage());
@@ -726,7 +727,7 @@ private List<Producto> obtenerProductosConProblemas() {
             contenidoPrincipal.getChildren().clear();
             contenidoPrincipal.getChildren().add(contenido);
 
-            primaryStage.setTitle("📚 Librería Papelitos - Módulo de Proveedores");
+            primaryStage.setTitle("📚 Librería - Módulo de Proveedores");
 
         } catch (IOException e) {
             System.err.println("❌ Error al cargar proveedores: " + e.getMessage());
@@ -748,7 +749,7 @@ private List<Producto> obtenerProductosConProblemas() {
             contenidoPrincipal.getChildren().clear();
             contenidoPrincipal.getChildren().add(contenido);
 
-            primaryStage.setTitle("📚 Librería Papelitos - Módulo de Compras");
+            primaryStage.setTitle("📚 Librería - Módulo de Compras");
 
         } catch (IOException e) {
             System.err.println("❌ Error al cargar compras: " + e.getMessage());
@@ -781,7 +782,7 @@ private List<Producto> obtenerProductosConProblemas() {
             contenidoPrincipal.getChildren().clear();
             contenidoPrincipal.getChildren().add(contenido);
 
-            primaryStage.setTitle("📚 Librería Papelitos - Gestión de Usuarios");
+            primaryStage.setTitle("📚 Librería - Gestión de Usuarios");
 
             System.out.println("✅ Módulo de usuarios cargado");
 
@@ -843,7 +844,7 @@ private List<Producto> obtenerProductosConProblemas() {
             contenidoPrincipal.getChildren().clear();
             contenidoPrincipal.getChildren().add(contenido);
 
-            primaryStage.setTitle("📚 Librería Papelitos - Módulo de Reportes");
+            primaryStage.setTitle("📚 Librería - Módulo de Reportes");
 
             System.out.println("✅ Módulo de reportes cargado");
 
@@ -874,7 +875,7 @@ private List<Producto> obtenerProductosConProblemas() {
             contenidoPrincipal.getChildren().clear();
             contenidoPrincipal.getChildren().add(contenido);
 
-            primaryStage.setTitle("📚 Librería Papelitos - Ventas del Día");
+            primaryStage.setTitle("📚 Librería - Ventas del Día");
 
             System.out.println("✅ Reporte de ventas del día cargado automáticamente");
 
@@ -898,7 +899,7 @@ private List<Producto> obtenerProductosConProblemas() {
             contenidoPrincipal.getChildren().clear();
             contenidoPrincipal.getChildren().add(contenido);
 
-            primaryStage.setTitle("📚 Librería Papelitos - Gestión de Clientes");
+            primaryStage.setTitle("📚 Librería - Gestión de Clientes");
 
             System.out.println("✅ Módulo de clientes cargado");
 

@@ -34,7 +34,7 @@ public class LoginApp extends Application {
      */
     public static void main(String[] args) {
         System.out.println("=".repeat(50));
-        System.out.println("📚 LIBRERÍA PAPELITOS - Sistema de Gestión");
+        System.out.println("📚 LIBRERÍA - Sistema de Gestión");
         System.out.println("=".repeat(50));
         System.out.println("🚀 Iniciando aplicación...");
 
@@ -79,7 +79,7 @@ public class LoginApp extends Application {
             Scene scene = new Scene(root, 600, 500);  // Aumentado de 400x300 a 600x500
 
             // PASO 3: Configurar el Stage
-            primaryStage.setTitle("🔐 Librería Papelitos - Inicio de Sesión");
+            primaryStage.setTitle("🔐 Librería- Inicio de Sesión");
             primaryStage.setScene(scene);
 
             // CAMBIO IMPORTANTE: Permitir redimensionar

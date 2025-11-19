@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.libreria.controller.CompraController"
+      spacing="15"
+      style="-fx-background-color: #2c3e50;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- ENCABEZADO -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="📦 Módulo de Compras"
+               style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <Button fx:id="btnNuevaCompra" text="➕ Nueva Compra" onAction="#nuevaCompra"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+    </HBox>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20;" VBox.vgrow="ALWAYS">
+
+        <!-- FILTROS -->
+        <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 0 0 10 0;">
+            <Label text="Filtros:" style="-fx-font-weight: bold;"/>
+
+            <Label text="Proveedor:"/>
+            <ComboBox fx:id="cbFiltroProveedor" prefWidth="200"/>
+
+            <Label text="Desde:"/>
+            <DatePicker fx:id="dpFechaDesde" prefWidth="150"/>
+
+            <Label text="Hasta:"/>
+            <DatePicker fx:id="dpFechaHasta" prefWidth="150"/>
+
+            <Button text="🔍 Aplicar" onAction="#aplicarFiltros"
+                    style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+
+            <Button fx:id="btnLimpiarFiltros" text="✖ Limpiar" onAction="#limpiarFiltros"
+                    style="-fx-background-color: #95a5a6; -fx-text-fill: white;"/>
+        </HBox>
+
+        <Separator/>
+
+        <!-- TABS (sin contenido, solo pestañas) -->
+        <TabPane fx:id="tabPane" VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+
+            <Tab fx:id="tabPendientes" text="Pendientes (0)">
+                <Label text=""/>
+            </Tab>
+
+            <Tab fx:id="tabCompletadas" text="Completadas (0)">
+                <Label text=""/>
+            </Tab>
+
+            <Tab fx:id="tabCanceladas" text="Canceladas (0)">
+                <Label text=""/>
+            </Tab>
+
+            <Tab fx:id="tabTodas" text="Todas (0)">
+                <Label text=""/>
+            </Tab>
+
+        </TabPane>
+
+        <!-- TABLA COMPARTIDA (debajo de los tabs) -->
+        <TableView fx:id="tablaCompras" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colNumero" text="Nº Compra" prefWidth="100"/>
+                <TableColumn fx:id="colFecha" text="Fecha" prefWidth="120"/>
+                <TableColumn fx:id="colProveedor" text="Proveedor" prefWidth="180"/>
+                <TableColumn fx:id="colTotal" text="Total" prefWidth="120"/>
+                <TableColumn fx:id="colEstado" text="Estado" prefWidth="120"/>
+                <TableColumn fx:id="colAcciones" text="" prefWidth="40"/>
+            </columns>
+        </TableView>
+
+    </VBox>
+
+</VBox>

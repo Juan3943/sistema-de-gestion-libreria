@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.libreria.controller.VentaController">
+
+    <!-- Sistema de Pestañas -->
+    <center>
+        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+
+            <!-- PESTAÑA 1: PRODUCTOS DISPONIBLES -->
+            <Tab text="🛍️ Productos">
+                <BorderPane>
+
+                    <!-- Parte superior: buscador -->
+                    <top>
+                        <VBox spacing="10" style="-fx-padding: 10;">
+                            <HBox alignment="CENTER_RIGHT" spacing="10">
+                                <Button fx:id="btnVolverHistorial" text="📊 Ver Historial"
+                                        onAction="#volverHistorial"
+                                        style="-fx-background-color: #2196F3;
+                                               -fx-text-fill: white;
+                                               -fx-padding: 8 15;"/>
+                            </HBox>
+
+                            <HBox spacing="10" alignment="CENTER">
+                                <TextField fx:id="txtBuscar" promptText="Buscar por código de barras o nombre"
+                                           prefWidth="300"/>
+                                <Button fx:id="btnBuscar" text="🔍 Buscar" onAction="#buscarProducto"/>
+                            </HBox>
+
+                            <!-- Información del carrito actual -->
+                            <HBox spacing="15" alignment="CENTER"
+                                  style="-fx-background-color: #f0f0f0; -fx-padding: 8; -fx-background-radius: 5;">
+                                <Label text="🛒 Items en carrito:"/>
+                                <Label fx:id="lblItemsCarrito" text="0"
+                                       style="-fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+                                <Separator orientation="VERTICAL"/>
+                                <Label text="💰 Total:"/>
+                                <Label fx:id="lblTotal" text="'$0.00'"
+                                       style="-fx-font-weight: bold; -fx-text-fill: #4CAF50; -fx-font-size: 14px;"/>
+                            </HBox>
+                        </VBox>
+                    </top>
+
+                    <!-- Centro: tabla de productos -->
+                    <center>
+                        <TableView fx:id="tablaProductos">
+                            <columns>
+                                <TableColumn fx:id="colCodigo" text="Código" prefWidth="120"/>
+                                <TableColumn fx:id="colNombre" text="Nombre" prefWidth="250"/>
+                                <TableColumn fx:id="colPrecio" text="Precio" prefWidth="100"/>
+                                <TableColumn fx:id="colStock" text="Stock" prefWidth="80"/>
+                                <TableColumn fx:id="colCantidad" text="Cantidad" prefWidth="100"/>
+                                <TableColumn fx:id="colAccion" text="Acción" prefWidth="120"/>
+                            </columns>
+
+                            <placeholder>
+                                <Label text="No hay productos para mostrar"
+                                       style="-fx-text-fill: gray;"/>
+                            </placeholder>
+                        </TableView>
+                    </center>
+
+                </BorderPane>
+            </Tab>
+
+            <!-- PESTAÑA 2: CARRITO DE COMPRAS -->
+            <Tab text="🛒 Carrito">
+                <BorderPane>
+
+                    <!-- Información del carrito -->
+                    <top>
+                        <VBox spacing="10" style="-fx-padding: 10;">
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="🛒 Productos en el Carrito"
+                                       style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Button fx:id="btnLimpiarCarrito" text="🗑️ Limpiar Carrito"
+                                        onAction="#limpiarCarrito"
+                                        style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+                            </HBox>
+
+                            <!-- Resumen del carrito -->
+                            <HBox spacing="20" alignment="CENTER"
+                                  style="-fx-background-color: #e8f5e8; -fx-padding: 15; -fx-background-radius: 5;">
+                                <VBox alignment="CENTER">
+                                    <Label text="Items"/>
+                                    <Label fx:id="lblTotalItems" text="0"
+                                           style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                                </VBox>
+                                <Separator orientation="VERTICAL"/>
+                                <VBox alignment="CENTER">
+                                    <Label text="Subtotal"/>
+                                    <Label fx:id="lblSubtotal" text="'$0.00'"
+                                           style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;"/>
+                                </VBox>
+                                <Separator orientation="VERTICAL"/>
+
+                                <VBox alignment="CENTER">
+                                    <Label text="TOTAL"/>
+                                    <Label fx:id="lblTotalFinal" text="'$0.00'"
+                                           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </top>
+
+                    <!-- Tabla del carrito -->
+                    <center>
+                        <TableView fx:id="tablaCarrito">
+                            <columns>
+                                <TableColumn fx:id="colCarritoCodigo" text="Código" prefWidth="120"/>
+                                <TableColumn fx:id="colCarritoNombre" text="Producto" prefWidth="200"/>
+                                <TableColumn fx:id="colCarritoPrecio" text="Precio Unit." prefWidth="100"/>
+                                <TableColumn fx:id="colCarritoCantidad" text="Cantidad" prefWidth="100"/>
+                                <TableColumn fx:id="colCarritoSubtotal" text="Subtotal" prefWidth="120"/>
+                                <TableColumn fx:id="colCarritoAcciones" text="Acciones" prefWidth="150"/>
+                            </columns>
+
+                            <placeholder>
+                                <VBox alignment="CENTER" spacing="10">
+                                    <Label text="🛒" style="-fx-font-size: 48px;"/>
+                                    <Label text="Tu carrito está vacío"
+                                           style="-fx-font-size: 16px; -fx-text-fill: gray;"/>
+                                    <Label text="Ve a la pestaña 'Productos' para agregar items"
+                                           style="-fx-text-fill: gray;"/>
+                                </VBox>
+                            </placeholder>
+                        </TableView>
+                    </center>
+
+                    <!-- Botones de acción -->
+
+                    <bottom>
+                        <VBox spacing="15" style="-fx-padding: 15;">
+
+                            <!-- Sección Venta con Cliente -->
+                            <VBox fx:id="seccionVentaCliente" spacing="10"
+                                  style="-fx-background-color: #e8f4f8; -fx-padding: 15; -fx-background-radius: 5;"
+                                  visible="false" managed="false">
+
+                                <HBox spacing="10" alignment="CENTER_LEFT">
+                                    <CheckBox fx:id="chkVentaConCliente" text="Venta con Cliente"/>
+                                </HBox>
+
+                                <HBox fx:id="panelSeleccionCliente" spacing="10" alignment="CENTER_LEFT"
+                                      visible="false" managed="false">
+                                    <Label text="Cliente:" prefWidth="80"/>
+                                    <ComboBox fx:id="cbClientes" prefWidth="250" promptText="Seleccionar cliente..."/>
+                                    <Button fx:id="btnNuevoClienteRapido" text="+ Nuevo Cliente"
+                                            style="-fx-background-color: #27ae60; -fx-text-fill: white;"/>
+                                </HBox>
+                            </VBox>
+
+                            <!-- Sección Método de Pago (la que ya existe) -->
+                            <VBox fx:id="seccionMetodoPago" spacing="10"
+                                  style="-fx-background-color: #f9f9f9; -fx-padding: 15; -fx-background-radius: 5;"
+                                  visible="false" managed="false">
+
+                                <Label text="Seleccionar Método de Pago"
+                                       style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                                <ComboBox fx:id="cbMetodoPago" prefWidth="200"
+                                          promptText="Seleccione método de pago"/>
+
+                                <Button fx:id="btnConfirmarVenta" text="Confirmar Venta"
+                                        onAction="#confirmarVenta" visible="false" managed="false"
+                                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px;"/>
+                            </VBox>
+
+                            <!-- Botones principales -->
+                            <HBox spacing="15" alignment="CENTER_RIGHT">
+                                <Button fx:id="btnContinuarComprando" text="Seguir Comprando"
+                                        onAction="#irAPestanaProductos"/>
+
+                                <Button fx:id="btnSeleccionarPago" text="Seleccionar Pago"
+                                        onAction="#mostrarMetodosPago" disable="true"
+                                        style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px;"/>
+                            </HBox>
+                        </VBox>
+                    </bottom>
+                </BorderPane>
+            </Tab>
+
+            <!-- PESTAÑA 3: RESUMEN Y FACTURA -->
+            <Tab text="📄 Resumen" disable="true">
+                <BorderPane>
+                    <center>
+                        <VBox alignment="CENTER" spacing="20" style="-fx-padding: 20;">
+                            <Label text="📄 Resumen de la Venta"
+                                   style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+                            <!-- Área para mostrar la factura/resumen -->
+                            <TextArea fx:id="txtResumenVenta" prefHeight="300" editable="false"
+                                      style="-fx-font-family: 'Courier New';"/>
+
+                            <HBox spacing="15" alignment="CENTER">
+                                <Button fx:id="btnNuevaVenta" text="🆕 Nueva Venta"
+                                        onAction="#nuevaVenta"
+                                        style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+                            </HBox>
+                        </VBox>
+                    </center>
+                </BorderPane>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+    <!-- Barra de estado inferior -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="10"
+              style="-fx-background-color: #f5f5f5; -fx-padding: 5 15;">
+            <Label fx:id="lblEstado" text="📱 Sistema listo"
+                   style="-fx-text-fill: #666;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblFecha" text="" style="-fx-text-fill: #666;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

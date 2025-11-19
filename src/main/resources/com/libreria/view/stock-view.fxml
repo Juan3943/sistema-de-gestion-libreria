@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.libreria.controller.StockController">
+
+    <!-- ENCABEZADO: Título y búsqueda -->
+    <top>
+        <VBox spacing="15" style="-fx-background-color: #34495e; -fx-padding: 20;">
+
+            <!-- Título principal -->
+            <HBox alignment="CENTER_LEFT">
+                <Label text="📦 Gestión de Productos"
+                       style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Control de Inventario"
+                       style="-fx-font-size: 14px; -fx-text-fill: #bdc3c7;"/>
+            </HBox>
+
+            <!-- Barra de búsqueda y filtros -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Buscar:" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+                <TextField fx:id="txtBuscar" promptText="Código o nombre del producto" prefWidth="250"/>
+                <Button fx:id="btnBuscar" text="🔍 Buscar" onAction="#buscarProductos"
+                        style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+                <Button fx:id="btnLimpiarBusqueda" text="🗑️ Limpiar" onAction="#limpiarBusqueda"
+                        style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+                <Button fx:id="btnSoloStockBajo" text="⚠️ Solo Stock Bajo" onAction="#mostrarSoloStockBajo"
+                        style="-fx-background-color: #e67e22; -fx-text-fill: white;"/>
+                <ComboBox fx:id="cbFiltroEstado" prefWidth="120"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="btnNuevoProducto" text="➕ Nuevo Producto" onAction="#nuevoProducto"
+                        style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15;"/>
+            </HBox>
+
+        </VBox>
+    </top>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <center>
+        <!-- Tabla de productos -->
+        <TableView fx:id="tablaProductos" style="-fx-background-color: white;">
+            <columns>
+                <TableColumn fx:id="colCodigo" text="Código" prefWidth="120" minWidth="100"/>
+                <TableColumn fx:id="colNombre" text="Nombre del Producto" prefWidth="200" minWidth="150"/>
+                <TableColumn fx:id="colCategoria" text="Categoría" prefWidth="100" minWidth="80"/>
+                <TableColumn fx:id="colStockActual" text="Stock" prefWidth="80" minWidth="60"/>
+                <TableColumn fx:id="colStockMinimo" text="Mín." prefWidth="60" minWidth="50"/>
+                <TableColumn fx:id="colPrecioVenta" text="Precio" prefWidth="100" minWidth="80"/>
+                <TableColumn fx:id="colEstadoStock" text="Estado Stock" prefWidth="100"/>
+                <TableColumn fx:id="colEstadoActivo" text="Estado" prefWidth="80" minWidth="70"/>
+                <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="60" minWidth="50"/>
+            </columns>
+
+            <!-- Mensaje cuando no hay datos -->
+            <placeholder>
+                <VBox alignment="CENTER" spacing="10" style="-fx-padding: 50;">
+                    <Label text="📦" style="-fx-font-size: 48px;"/>
+                    <Label text="No hay productos para mostrar"
+                           style="-fx-font-size: 16px; -fx-text-fill: #7f8c8d;"/>
+                    <Label text="Use el botón 'Nuevo Producto' para agregar el primero"
+                           style="-fx-font-size: 12px; -fx-text-fill: #95a5a6;"/>
+                </VBox>
+            </placeholder>
+        </TableView>
+    </center>
+
+    <!-- PIE: Estadísticas y acciones -->
+    <bottom>
+        <VBox spacing="10" style="-fx-background-color: #ecf0f1; -fx-padding: 15;">
+
+            <!-- Estadísticas -->
+            <HBox spacing="30" alignment="CENTER_LEFT"
+                  style="-fx-background-color: white; -fx-padding: 15; -fx-border-radius: 5;">
+
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="📊" style="-fx-font-size: 20px;"/>
+                    <Label text="ESTADÍSTICAS" style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #7f8c8d;"/>
+                </VBox>
+
+                <Separator orientation="VERTICAL"/>
+
+                <VBox alignment="CENTER" spacing="3">
+                    <Label fx:id="lblTotalProductos" text="Total: 0"
+                           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                    <Label text="Productos registrados"
+                           style="-fx-font-size: 10px; -fx-text-fill: #7f8c8d;"/>
+                </VBox>
+
+                <Separator orientation="VERTICAL"/>
+
+                <VBox alignment="CENTER" spacing="3">
+                    <Label fx:id="lblProductosStockBajo" text="Stock bajo: 0"
+                           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #e67e22;"/>
+                    <Label text="Requieren atención"
+                           style="-fx-font-size: 10px; -fx-text-fill: #7f8c8d;"/>
+                </VBox>
+
+                <Separator orientation="VERTICAL"/>
+
+                <VBox alignment="CENTER" spacing="3">
+                    <Label fx:id="lblProductosSinStock" text="Sin stock: 0"
+                           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #e74c3c;"/>
+                    <Label text="Sin disponibilidad"
+                           style="-fx-font-size: 10px; -fx-text-fill: #7f8c8d;"/>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Botón actualizar -->
+                <Button fx:id="btnActualizar" text="🔄 Actualizar" onAction="#actualizarDatos"
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8 20;"/>
+            </HBox>
+
+            <!-- Información de ayuda -->
+            <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 5 0;">
+                <Label text="💡" style="-fx-font-size: 12px;"/>
+                <Label text="Haga clic en 📦 para ajustar stock, o en ℹ️ para ver información completa del producto"
+                       style="-fx-font-size: 11px; -fx-text-fill: #7f8c8d;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Datos actualizados automáticamente"
+                       style="-fx-font-size: 10px; -fx-text-fill: #95a5a6; -fx-font-style: italic;"/>
+            </HBox>
+
+        </VBox>
+    </bottom>
+
+</BorderPane>
+
+        <!--
+        =====================================================
+        EXPLICACIÓN DEL DISEÑO FXML:
+        =====================================================
+
+        ESTRUCTURA PRINCIPAL:
+        - BorderPane: Layout principal que divide la pantalla en regiones
+          * top: Encabezado con título y búsqueda
+          * center: Tabla principal de productos
+          * bottom: Estadísticas y información
+
+        ELEMENTOS IMPORTANTES:
+
+        1. fx:controller: Conecta este FXML con StockController.java
+
+        2. fx:id: Identifica elementos para usar desde Java
+           - txtBuscar, btnBuscar, etc. corresponden a las variables @FXML
+
+        3. onAction: Define qué método llamar cuando se hace clic
+           - onAction="#buscarProductos" llama al método buscarProductos()
+
+        4. TableView y TableColumn:
+           - fx:id="tablaProductos" se conecta con la variable en Java
+           - Cada columna tiene prefWidth para controlar el ancho
+           - minWidth evita que se hagan demasiado pequeñas
+
+        5. Estilos CSS embebidos:
+           - -fx-background-color: Color de fondo
+           - -fx-text-fill: Color del texto
+           - -fx-font-size: Tamaño de fuente
+           - -fx-padding: Espaciado interno
+
+        6. Layout containers:
+           - VBox: Organiza verticalmente
+           - HBox: Organiza horizontalmente
+           - Region: Espaciador flexible (HBox.hgrow="ALWAYS")
+
+        7. placeholder: Contenido que se muestra cuando la tabla está vacía
+
+        FLUJO DE DATOS:
+        1. Usuario escribe en txtBuscar
+        2. Hace clic en btnBuscar
+        3. JavaFX llama a buscarProductos() en StockController
+        4. El controller actualiza productosData
+        5. La tabla se actualiza automáticamente (ObservableList)
+
+        Este diseño es:
+        - Responsivo: Se adapta al tamaño de ventana
+        - Funcional: Todos los elementos están conectados
+        - Profesional: Colores y espaciado consistentes
+        - Intuitivo: Iconos y textos claros
+        -->

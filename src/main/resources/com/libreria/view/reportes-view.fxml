@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.libreria.controller.ReportesController"
+            prefHeight="700" prefWidth="1200">
+
+    <!-- ENCABEZADO -->
+    <top>
+        <VBox spacing="10" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <Label text="MÓDULO DE REPORTES"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            <Label text="Análisis y estadísticas del negocio"
+                   style="-fx-font-size: 14px; -fx-text-fill: #ecf0f1;"/>
+        </VBox>
+    </top>
+
+    <!-- CONTENIDO PRINCIPAL: PESTAÑAS -->
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+
+            <!-- ============================================ -->
+            <!-- PESTAÑA 1: VENTAS DIARIAS -->
+            <!-- ============================================ -->
+            <Tab text="📊 Ventas Diarias">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="Desde:" style="-fx-font-weight: bold;"/>
+                        <DatePicker fx:id="dp1FechaInicio"/>
+                        <Label text="Hasta:" style="-fx-font-weight: bold;"/>
+                        <DatePicker fx:id="dp1FechaFin"/>
+                        <Button text="Generar" onAction="#generarReporteVentasDiarias"
+                                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8 20;"/>
+                        <Button text="Exportar CSV" onAction="#exportarVentasDiarias"
+                                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 8 20;"/>
+                    </HBox>
+
+                    <LineChart fx:id="chart1VentasDiarias" title="Evolución Diaria" prefHeight="250" animated="false">
+                        <xAxis><CategoryAxis label="Fecha"/></xAxis>
+                        <yAxis><NumberAxis label="Total ($)"/></yAxis>
+                    </LineChart>
+
+                    <TableView fx:id="table1VentasDiarias" prefHeight="250">
+                        <columns>
+                            <TableColumn fx:id="col1Fecha" text="Fecha" prefWidth="120"/>
+                            <TableColumn fx:id="col1CantVentas" text="Cantidad Ventas" prefWidth="130"/>
+                            <TableColumn fx:id="col1TotalVendido" text="Total Vendido" prefWidth="150"/>
+                            <TableColumn fx:id="col1Acciones" text="Acciones" prefWidth="120"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- ============================================ -->
+            <!-- PESTAÑA 2: VENTAS SEMANALES -->
+            <!-- ============================================ -->
+            <Tab text="📅 Ventas Semanales">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="Desde:" style="-fx-font-weight: bold;"/>
+                        <DatePicker fx:id="dp2FechaInicio"/>
+                        <Label text="Hasta:" style="-fx-font-weight: bold;"/>
+                        <DatePicker fx:id="dp2FechaFin"/>
+                        <Button text="Generar" onAction="#generarReporteVentasSemanales"
+                                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8 20;"/>
+                        <Button text="Exportar CSV" onAction="#exportarVentasSemanales"
+                                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 8 20;"/>
+                    </HBox>
+
+                    <BarChart fx:id="chart2VentasSemanales" title="Ventas por Semana" prefHeight="250" animated="false">
+                        <xAxis><CategoryAxis label="Semana"/></xAxis>
+                        <yAxis><NumberAxis label="Total ($)"/></yAxis>
+                    </BarChart>
+
+                    <TableView fx:id="table2VentasSemanales" prefHeight="250">
+                        <columns>
+                            <TableColumn fx:id="col2Semana" text="Semana" prefWidth="120"/>
+                            <TableColumn fx:id="col2FechaInicio" text="Inicio" prefWidth="120"/>
+                            <TableColumn fx:id="col2FechaFin" text="Fin" prefWidth="120"/>
+                            <TableColumn fx:id="col2CantVentas" text="Cantidad" prefWidth="100"/>
+                            <TableColumn fx:id="col2TotalVendido" text="Total" prefWidth="150"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- ============================================ -->
+            <!-- PESTAÑA 3: PRODUCTOS MÁS VENDIDOS -->
+            <!-- ============================================ -->
+            <Tab text="🏆 Top Productos">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="Desde:" style="-fx-font-weight: bold;"/>
+                        <DatePicker fx:id="dp3FechaInicio"/>
+                        <Label text="Hasta:" style="-fx-font-weight: bold;"/>
+                        <DatePicker fx:id="dp3FechaFin"/>
+                        <Button text="Generar" onAction="#generarReporteProductosTop"
+                                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8 20;"/>
+                        <Button text="Exportar CSV" onAction="#exportarProductosTop"
+                                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 8 20;"/>
+                    </HBox>
+
+                    <BarChart fx:id="chart3ProductosTop" title="Top 10 Productos" prefHeight="250" animated="false">
+                        <xAxis><CategoryAxis label="Producto"/></xAxis>
+                        <yAxis><NumberAxis label="Cantidad"/></yAxis>
+                    </BarChart>
+
+                    <TableView fx:id="table3ProductosTop" prefHeight="250">
+                        <columns>
+                            <TableColumn fx:id="col3Codigo" text="Código" prefWidth="120"/>
+                            <TableColumn fx:id="col3Nombre" text="Producto" prefWidth="350"/>
+                            <TableColumn fx:id="col3Cantidad" text="Cantidad" prefWidth="100"/>
+                            <TableColumn fx:id="col3TotalGenerado" text="Total" prefWidth="150"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- ============================================ -->
+            <!-- PESTAÑA 4: CORTE DE CAJA -->
+            <!-- ============================================ -->
+            <Tab text="💰 Corte de Caja">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="Fecha:" style="-fx-font-weight: bold;"/>
+                        <DatePicker fx:id="dp4Fecha"/>
+                        <Button text="Generar" onAction="#generarReporteCorteCaja"
+                                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8 20;"/>
+                        <Button text="Exportar CSV" onAction="#exportarCorteCaja"
+                                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 8 20;"/>
+                    </HBox>
+
+                    <!-- Resumen en cards -->
+                    <HBox spacing="20" alignment="CENTER">
+                        <VBox alignment="CENTER" spacing="5"
+                              style="-fx-background-color: #3498db; -fx-padding: 20; -fx-background-radius: 10;">
+                            <Label fx:id="lbl4TotalVentas" text="0"
+                                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                            <Label text="Ventas Totales" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+                        </VBox>
+
+                        <VBox alignment="CENTER" spacing="5"
+                              style="-fx-background-color: #27ae60; -fx-padding: 20; -fx-background-radius: 10;">
+                            <Label fx:id="lbl4MontoTotal" text="'$0.00'"
+                                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                            <Label text="Monto Total" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+                        </VBox>
+                    </HBox>
+
+                    <PieChart fx:id="chart4CorteCaja" title="Distribución por Método de Pago"
+                              prefHeight="250" animated="false"/>
+
+                    <TableView fx:id="table4CorteCaja" prefHeight="200">
+                        <columns>
+                            <TableColumn fx:id="col4MetodoPago" text="Método de Pago" prefWidth="300"/>
+                            <TableColumn fx:id="col4CantVentas" text="Cantidad" prefWidth="150"/>
+                            <TableColumn fx:id="col4MontoTotal" text="Monto Total" prefWidth="200"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- ============================================ -->
+            <!-- PESTAÑA 5: STOCK CRÍTICO -->
+            <!-- ============================================ -->
+            <Tab text="⚠️ Stock Crítico">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="Productos con stock igual o menor al mínimo"
+                               style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Actualizar" onAction="#generarReporteStockCritico"
+                                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8 20;"/>
+                        <Button text="Exportar CSV" onAction="#exportarStockCritico"
+                                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 8 20;"/>
+                    </HBox>
+
+                    <!-- Alerta -->
+                    <HBox spacing="10" alignment="CENTER_LEFT"
+                          style="-fx-background-color: #e74c3c; -fx-padding: 15; -fx-background-radius: 5;">
+                        <Label text="⚠️" style="-fx-font-size: 24px;"/>
+                        <VBox>
+                            <Label fx:id="lbl5CantidadCriticos" text="0 productos en stock crítico"
+                                   style="-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 16px;"/>
+                            <Label text="Revise la lista y genere órdenes de compra"
+                                   style="-fx-text-fill: white;"/>
+                        </VBox>
+                    </HBox>
+
+                    <TableView fx:id="table5StockCritico" prefHeight="450">
+                        <columns>
+                            <TableColumn fx:id="col5Codigo" text="Código" prefWidth="120"/>
+                            <TableColumn fx:id="col5Producto" text="Producto" prefWidth="300"/>
+                            <TableColumn fx:id="col5Categoria" text="Categoría" prefWidth="150"/>
+                            <TableColumn fx:id="col5StockActual" text="Stock Actual" prefWidth="120"/>
+                            <TableColumn fx:id="col5StockMinimo" text="Stock Mínimo" prefWidth="120"/>
+                            <TableColumn fx:id="col5Faltante" text="Faltante" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- ============================================ -->
+            <!-- PESTAÑA 6: PRODUCTOS SIN MOVIMIENTO -->
+            <!-- ============================================ -->
+            <Tab text="💤 Sin Movimiento">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="Productos sin ventas en los últimos:" style="-fx-font-weight: bold;"/>
+                        <TextField fx:id="txt6Dias" text="30" prefWidth="60"/>
+                        <Label text="días" style="-fx-font-weight: bold;"/>
+                        <Button text="Generar" onAction="#generarReporteProductosSinMovimiento"
+                                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8 20;"/>
+                        <Button text="Exportar CSV" onAction="#exportarProductosSinMovimiento"
+                                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 8 20;"/>
+                    </HBox>
+
+                    <!-- Resumen -->
+                    <HBox spacing="20" alignment="CENTER">
+                        <VBox alignment="CENTER" spacing="5"
+                              style="-fx-background-color: #e67e22; -fx-padding: 20; -fx-background-radius: 10;">
+                            <Label fx:id="lbl6CantidadProductos" text="0"
+                                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                            <Label text="Productos sin movimiento" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+                        </VBox>
+
+                        <VBox alignment="CENTER" spacing="5"
+                              style="-fx-background-color: #95a5a6; -fx-padding: 20; -fx-background-radius: 10;">
+                            <Label fx:id="lbl6ValorInventario" text="'$0.00'"
+                                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                            <Label text="Valor inmovilizado" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+                        </VBox>
+                    </HBox>
+
+                    <TableView fx:id="table6SinMovimiento" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="col6Codigo" text="Código" prefWidth="120"/>
+                            <TableColumn fx:id="col6Producto" text="Producto" prefWidth="280"/>
+                            <TableColumn fx:id="col6Categoria" text="Categoría" prefWidth="130"/>
+                            <TableColumn fx:id="col6Stock" text="Stock" prefWidth="100"/>
+                            <TableColumn fx:id="col6Dias" text="Días sin venta" prefWidth="120"/>
+                            <TableColumn fx:id="col6Valor" text="Valor Inventario" prefWidth="150"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+    <!-- PIE DE PÁGINA -->
+    <bottom>
+        <HBox spacing="15" alignment="CENTER_LEFT"
+              style="-fx-background-color: #ecf0f1; -fx-padding: 10;">
+            <Label fx:id="lblStatus" text="Sistema listo" style="-fx-font-style: italic;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblFechaActual" text="Fecha: --/--/----" style="-fx-font-weight: bold;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.libreria.controller.HistorialVentasController">
+
+    <!-- ENCABEZADO -->
+    <top>
+        <VBox spacing="15" style="-fx-padding: 15; -fx-background-color: #f5f5f5;">
+
+            <!-- Título y botón volver al carrito -->
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Label text="📊 HISTORIAL DE VENTAS"
+                       style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnVolverCarrito" text="🛒 Nueva Venta"
+                        onAction="#abrirNuevaVenta"
+                        style="-fx-background-color: #4CAF50;
+                               -fx-text-fill: white;
+                               -fx-font-size: 14px;
+                               -fx-padding: 10 20;"/>
+            </HBox>
+
+            <!-- Panel de filtros -->
+            <VBox spacing="10" style="-fx-background-color: white;
+                                      -fx-padding: 15;
+                                      -fx-border-color: #ddd;
+                                      -fx-border-radius: 5;
+                                      -fx-background-radius: 5;">
+
+                <Label text="🔍 Filtros de Búsqueda"
+                       style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+
+                <!-- Primera fila de filtros -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Buscar:" prefWidth="80"/>
+                    <TextField fx:id="txtBuscar"
+                               promptText="Número de comprobante..."
+                               prefWidth="200"/>
+
+                    <Label text="Desde:" prefWidth="60"/>
+                    <DatePicker fx:id="dpFechaDesde" prefWidth="150"/>
+
+                    <Label text="Hasta:" prefWidth="60"/>
+                    <DatePicker fx:id="dpFechaHasta" prefWidth="150"/>
+                </HBox>
+
+                <!-- Segunda fila de filtros -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Cliente:" prefWidth="80"/>
+                    <ComboBox fx:id="cbClientes"
+                              promptText="Todos los clientes"
+                              prefWidth="200"/>
+
+                    <Label text="Estado:" prefWidth="60"/>
+                    <ComboBox fx:id="cbEstado" prefWidth="150"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Button fx:id="btnBuscar" text="🔍 Buscar"
+                            onAction="#aplicarFiltros"
+                            style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+
+                    <Button fx:id="btnLimpiarFiltros" text="🗑️ Limpiar"
+                            onAction="#limpiarFiltros"
+                            style="-fx-background-color: #757575; -fx-text-fill: white;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </top>
+
+    <!-- TABLA DE VENTAS -->
+    <center>
+        <TableView fx:id="tablaVentas" style="-fx-padding: 10;">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
+                <TableColumn fx:id="colNumero" text="N° Comprobante" prefWidth="150"/>
+                <TableColumn fx:id="colFecha" text="Fecha" prefWidth="150"/>
+                <TableColumn fx:id="colCliente" text="Cliente" prefWidth="180"/>
+                <TableColumn fx:id="colTotal" text="Total" prefWidth="100"/>
+                <TableColumn fx:id="colEstado" text="Estado" prefWidth="100"/>
+                <TableColumn fx:id="colVendedor" text="Vendedor" prefWidth="120"/>
+                <TableColumn fx:id="colAcciones" text="" prefWidth="60"/>
+            </columns>
+
+            <placeholder>
+                <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+                    <Label text="📊" style="-fx-font-size: 48px;"/>
+                    <Label text="No hay ventas para mostrar"
+                           style="-fx-font-size: 16px; -fx-text-fill: gray;"/>
+                    <Label text="Prueba ajustando los filtros de búsqueda"
+                           style="-fx-text-fill: gray;"/>
+                </VBox>
+            </placeholder>
+        </TableView>
+    </center>
+
+    <!-- CONTROLES DE PAGINACIÓN -->
+    <bottom>
+        <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #f5f5f5;">
+
+            <!-- Información de paginación -->
+            <HBox alignment="CENTER" spacing="20">
+                <Label fx:id="lblInfoPaginacion"
+                       text="Mostrando 0-0 de 0 ventas"
+                       style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+            </HBox>
+
+            <!-- Botones de navegación -->
+            <HBox alignment="CENTER" spacing="15">
+                <Button fx:id="btnPrimera" text="◄◄ Primera"
+                        onAction="#irPrimera"
+                        prefWidth="100"/>
+
+                <Button fx:id="btnAnterior" text="◄ Anterior"
+                        onAction="#irAnterior"
+                        prefWidth="100"/>
+
+                <Label fx:id="lblPaginaActual"
+                       text="Página 1 de 1"
+                       style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                <Button fx:id="btnSiguiente" text="Siguiente ►"
+                        onAction="#irSiguiente"
+                        prefWidth="100"/>
+
+                <Button fx:id="btnUltima" text="Última ►►"
+                        onAction="#irUltima"
+                        prefWidth="100"/>
+            </HBox>
+
+            <!-- Estado -->
+            <HBox alignment="CENTER">
+                <Label fx:id="lblEstado"
+                       text="📊 Sistema listo"
+                       style="-fx-text-fill: #666;"/>
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>

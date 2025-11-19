@@ -1,0 +1,9 @@
+# Configuración de Base de Datos - Librería Papelitos
+# INSTRUCCIONES:
+# 1. Copia este archivo y renómbralo a: database.properties
+# 2. Reemplaza los valores con tus credenciales reales de MySQL
+
+db.url=jdbc:mysql://localhost:3306/libreria_papelitos
+db.user=TU_USUARIO_MYSQL
+db.password=TU_PASSWORD_MYSQL
+db.driver=com.mysql.cj.jdbc.Driver

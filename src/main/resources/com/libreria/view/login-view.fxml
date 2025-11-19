@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<!--
+    VISTA: Login
+    Pantalla simple de inicio de sesión
+
+    CONCEPTO FXML:
+    - Es XML que describe la interfaz visual
+    - fx:controller conecta esta vista con LoginController.java
+    - fx:id permite acceder a los elementos desde el controller
+    - onAction define qué método se ejecuta al hacer click
+-->
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.libreria.controller.LoginController"
+      alignment="CENTER"
+      spacing="20"
+      prefWidth="600"
+      prefHeight="500"
+      style="-fx-background-color: #ecf0f1;">
+
+    <!-- Padding alrededor de todo el contenido -->
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+
+    <!-- PANEL CENTRAL: Caja blanca con el formulario -->
+    <VBox alignment="CENTER"
+          spacing="25"
+          style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);"
+          maxWidth="400">
+
+        <padding>
+            <Insets top="40" right="50" bottom="40" left="50"/>
+        </padding>
+
+        <!-- TÍTULO -->
+        <VBox alignment="CENTER" spacing="8">
+            <Label text="📚 Librería Papelitos"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+            <Label text="Sistema de Gestión"
+                   style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;"/>
+
+            <Separator prefWidth="200"/>
+
+            <Label text="Iniciar Sesión"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #34495e;">
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+            </Label>
+        </VBox>
+
+        <!-- CAMPO: Usuario -->
+        <VBox spacing="8">
+            <Label text="Usuario:"
+                   style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+            <!--
+                TextField: Campo de texto normal
+                fx:id="txtUsuario" permite acceder desde LoginController
+                promptText es el texto "fantasma" que aparece cuando está vacío
+            -->
+            <TextField fx:id="txtUsuario"
+                       promptText="Ingrese su nombre de usuario"
+                       style="-fx-font-size: 14px; -fx-padding: 10;"
+                       onAction="#handleLogin"/>
+            <!-- onAction="#handleLogin" = al presionar ENTER, ejecuta handleLogin() -->
+        </VBox>
+
+        <!-- CAMPO: Contraseña CON BOTÓN OJO -->
+        <VBox spacing="8">
+            <Label text="Contraseña:"
+                   style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+            <!-- Contenedor horizontal para campo + botón ojo -->
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <!-- StackPane: permite superponer PasswordField y TextField -->
+                <StackPane HBox.hgrow="ALWAYS">
+                    <PasswordField fx:id="txtPassword"
+                                   promptText="Ingrese su contraseña"
+                                   style="-fx-font-size: 14px; -fx-padding: 10;"
+                                   onAction="#handleLogin"/>
+
+                    <TextField fx:id="txtPasswordVisible"
+                               promptText="Ingrese su contraseña"
+                               style="-fx-font-size: 14px; -fx-padding: 10;"
+                               onAction="#handleLogin"
+                               visible="false"
+                               managed="false"/>
+                </StackPane>
+
+                <!-- Botón Ojo -->
+                <Button fx:id="btnMostrarPassword"
+                        text="👁"
+                        onAction="#handleTogglePassword"
+                        style="-fx-cursor: hand; -fx-padding: 10 15; -fx-font-size: 14px;"/>
+            </HBox>
+        </VBox>
+
+        <!-- LABEL DE ERROR -->
+        <!--
+            Este label está oculto por defecto (visible="false")
+            El controller lo mostrará cuando haya error
+        -->
+        <Label fx:id="lblError"
+               text="Usuario o contraseña incorrectos"
+               style="-fx-text-fill: #e74c3c; -fx-font-size: 12px; -fx-font-weight: bold;"
+               visible="false"
+               wrapText="true"
+               alignment="CENTER"/>
+
+        <!-- BOTONES -->
+        <HBox spacing="15" alignment="CENTER">
+            <VBox.margin>
+                <Insets top="10"/>
+            </VBox.margin>
+
+            <!-- BOTÓN: Iniciar Sesión -->
+            <!--
+                onAction="#handleLogin" ejecuta el método handleLogin() del controller
+            -->
+            <Button fx:id="btnLogin"
+                    text="Iniciar Sesión"
+                    onAction="#handleLogin"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 12 30; -fx-cursor: hand;"
+                    defaultButton="true"/>
+            <!-- defaultButton="true" = se activa al presionar ENTER -->
+
+            <!-- BOTÓN: Cerrar Aplicación -->
+            <Button text="Cerrar"
+                    onAction="#handleCerrar"
+                    style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12 30; -fx-cursor: hand;"/>
+        </HBox>
+
+    </VBox>
+
+    <!-- PIE DE PÁGINA -->
+    <Label text="v1.0 - Desarrollado para Librería Papelitos"
+           style="-fx-text-fill: #95a5a6; -fx-font-size: 10px;">
+        <VBox.margin>
+            <Insets top="20"/>
+        </VBox.margin>
+    </Label>
+
+</VBox>

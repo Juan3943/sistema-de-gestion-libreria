@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.libreria.controller.ServiciosController">
+
+    <!-- ENCABEZADO -->
+    <top>
+        <VBox spacing="15" style="-fx-background-color: #9b59b6; -fx-padding: 20;">
+
+            <HBox alignment="CENTER_LEFT">
+                <Label text="🛠️ Gestión de Servicios"
+                       style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Servicios sin Manejo de Stock"
+                       style="-fx-font-size: 14px; -fx-text-fill: #ecf0f1;"/>
+            </HBox>
+
+            <!-- Barra de búsqueda -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Buscar:" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+                <TextField fx:id="txtBuscar" promptText="Código o nombre del servicio" prefWidth="250"/>
+                <Button fx:id="btnBuscar" text="🔍 Buscar" onAction="#buscarServicios"
+                        style="-fx-background-color: #8e44ad; -fx-text-fill: white;"/>
+                <Button fx:id="btnLimpiarBusqueda" text="🗑️ Limpiar" onAction="#limpiarBusqueda"
+                        style="-fx-background-color: #7d3c98; -fx-text-fill: white;"/>
+                <ComboBox fx:id="cbFiltroEstado" prefWidth="120"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="btnNuevoServicio" text="➕ Nuevo Servicio" onAction="#nuevoServicio"
+                        style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15;"/>
+            </HBox>
+
+        </VBox>
+    </top>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <center>
+        <TableView fx:id="tablaServicios" style="-fx-background-color: white;">
+            <columns>
+                <TableColumn fx:id="colCodigo" text="Código" prefWidth="120" minWidth="100"/>
+                <TableColumn fx:id="colNombre" text="Nombre del Servicio" prefWidth="250" minWidth="150"/>
+                <TableColumn fx:id="colCategoria" text="Categoría" prefWidth="120" minWidth="80"/>
+                <TableColumn fx:id="colPrecio" text="Precio" prefWidth="100" minWidth="80"/>
+                <TableColumn fx:id="colEstado" text="Estado" prefWidth="80" minWidth="70"/>
+                <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="60" minWidth="50"/>
+            </columns>
+
+            <placeholder>
+                <VBox alignment="CENTER" spacing="10" style="-fx-padding: 50;">
+                    <Label text="🛠️" style="-fx-font-size: 48px;"/>
+                    <Label text="No hay servicios para mostrar"
+                           style="-fx-font-size: 16px; -fx-text-fill: #7f8c8d;"/>
+                    <Label text="Use el botón 'Nuevo Servicio' para agregar el primero"
+                           style="-fx-font-size: 12px; -fx-text-fill: #95a5a6;"/>
+                </VBox>
+            </placeholder>
+        </TableView>
+    </center>
+
+    <!-- PIE: Estadísticas -->
+    <bottom>
+        <VBox spacing="10" style="-fx-background-color: #ecf0f1; -fx-padding: 15;">
+
+            <HBox spacing="30" alignment="CENTER_LEFT"
+                  style="-fx-background-color: white; -fx-padding: 15; -fx-border-radius: 5;">
+
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="📊" style="-fx-font-size: 20px;"/>
+                    <Label text="ESTADÍSTICAS" style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #7f8c8d;"/>
+                </VBox>
+
+                <Separator orientation="VERTICAL"/>
+
+                <VBox alignment="CENTER" spacing="3">
+                    <Label fx:id="lblTotalServicios" text="Total: 0"
+                           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                    <Label text="Servicios registrados"
+                           style="-fx-font-size: 10px; -fx-text-fill: #7f8c8d;"/>
+                </VBox>
+
+                <Separator orientation="VERTICAL"/>
+
+                <VBox alignment="CENTER" spacing="3">
+                    <Label fx:id="lblServiciosActivos" text="Activos: 0"
+                           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #27ae60;"/>
+                    <Label text="Disponibles"
+                           style="-fx-font-size: 10px; -fx-text-fill: #7f8c8d;"/>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="btnActualizar" text="🔄 Actualizar" onAction="#actualizarDatos"
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8 20;"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 5 0;">
+                <Label text="💡" style="-fx-font-size: 12px;"/>
+                <Label text="Los servicios no manejan stock. Haga clic en ✏️ para editar o en ℹ️ para ver información"
+                       style="-fx-font-size: 11px; -fx-text-fill: #7f8c8d;"/>
+            </HBox>
+
+        </VBox>
+    </bottom>
+
+</BorderPane>

@@ -35,8 +35,8 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado:
 
 ### 1. Clonar el Repositorio
 ```bash
-git clone https://github.com/TuUsuario/libreria-papelitos.git
-cd libreria-papelitos
+git clone https://github.com/TuUsuario/sistema-de-gestion-libreria.git
+cd sistema-de-gestion-libreria
 ```
 
 ### 2. Configurar la Base de Datos
@@ -45,7 +45,7 @@ cd libreria-papelitos
 
 Abre MySQL Workbench o la terminal de MySQL y ejecuta:
 ```sql
-CREATE DATABASE libreria_papelitos;
+CREATE DATABASE libreria;
 ```
 
 #### 2.2 Importar el script SQL con datos de prueba:
@@ -58,7 +58,7 @@ El proyecto incluye un dump completo con la estructura de tablas y datos de ejem
 cd C:\Users\TuUsuario\IdeaProjects\Libreria
 
 # Importa el dump (te pedirá la contraseña de MySQL)
-mysql -u root -p libreria_papelitos < database/DumpLibreriaPapelitos.sql
+mysql -u root -p libreria < database/DumpLibreria.sql
 ```
 
 **Opción B: Desde MySQL Workbench**
@@ -67,13 +67,13 @@ mysql -u root -p libreria_papelitos < database/DumpLibreriaPapelitos.sql
 2. Conecta a tu servidor local
 3. Ve a: **Server → Data Import**
 4. Selecciona: **"Import from Self-Contained File"**
-5. Busca el archivo: `database/DumpLibreriaPapelitos.sql`
-6. En **"Default Target Schema"** selecciona: `libreria_papelitos`
+5. Busca el archivo: `database/DumpLibreria.sql`
+6. En **"Default Target Schema"** selecciona: `libreria`
 7. Clic en **"Start Import"**
 
 #### 2.3 Verificar que se importó correctamente:
 ```sql
-USE libreria_papelitos;
+USE libreria;
 SHOW TABLES;
 ```
 
@@ -105,7 +105,7 @@ cp database.properties.example database.properties
 
 Abre el archivo `database.properties` (que acabas de crear) y edita con tus datos de MySQL:
 ```properties
-db.url=jdbc:mysql://localhost:3306/libreria_papelitos
+db.url=jdbc:mysql://localhost:3306/libreria
 db.user=root
 db.password=TU_CONTRASEÑA_MYSQL
 db.driver=com.mysql.cj.jdbc.Driver
